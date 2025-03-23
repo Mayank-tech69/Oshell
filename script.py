@@ -3,14 +3,19 @@ import os
 import subprocess
 import shutil
 import readline
+
 prev_dir = None
 
+# List of built-in commands in Oshell
+BUILTIN_COMMANDS = [
+    "exit", "speak", "type", "clear", "ls", "makedir", "removedir", 
+    "changedir", "curdir", "createfile", "delfile", "writefile", 
+    "appendfile", "copyfile"
+]
 
 def main():
     global prev_dir
     while True:
-        #history = []
-
         current_dir = os.getcwd()
         sys.stdout.write(f"Current Working Directory is : {current_dir}\n")
 
@@ -19,7 +24,6 @@ def main():
         command = input()
 
         if command.strip():
-            # history.append(command)
             readline.add_history(command)
 
         c = command.split()
@@ -38,37 +42,33 @@ def main():
             continue
 
         if c[0] == 'type' and len(c) > 1:
-            for s in c[1:]:
-                if s in ['speak', 'exit', 'type']:
-                    print(f"{s} is a shell builtin command")
+            for cmd in c[1:]:
+                if cmd in BUILTIN_COMMANDS:
+                    print(f"{cmd} is a shell built-in command")
                 else:
                     found = False
-                    paths = os.getenv("PATH").split(";" if os.name == "nt" else ":")  
-                    
+                    paths = os.getenv("PATH").split(os.pathsep)  
+
                     for path in paths:
                         if os.path.isdir(path):
                             for ext in ([""] if os.name != "nt" else os.getenv("PATHEXT").split(";")):
-                                full_path = os.path.join(path, s + ext)
+                                full_path = os.path.join(path, cmd + ext)
                                 if os.path.exists(full_path):
-                                    print(f"{s} is {full_path}")
+                                    print(f"{cmd} is an executable command at {full_path}")
                                     found = True
                                     break
                         if found:
                             break
                     
                     if not found:
-                        print(f"{s}: not found")
+                        print(f"{cmd}: not found")
             continue
 
         if c[0] == 'clear':
-            if os.name == 'nt':
-                os.system('cls')
-            else:
-                os.system('clear')
+            os.system('cls' if os.name == 'nt' else 'clear')
             continue
 
-        #directory manupulation
-
+        # Directory Manipulation
         if c[0] == 'ls':
             try:
                 if os.name == 'nt':  
@@ -82,35 +82,29 @@ def main():
 
         if c[0] == 'makedir':
             if len(c) > 1:
-                directory_name = c[1]
                 try:
-                    os.mkdir(directory_name)
-                    print(f"Directory:{directory_name} created successfully")
+                    os.mkdir(c[1])
+                    print(f"Directory: {c[1]} created successfully")
                 except FileExistsError:
-                    print(f"Error: The directory '{directory_name}' already exists.")
+                    print(f"Error: The directory '{c[1]}' already exists.")
                 except PermissionError:
-                    print(f"Error: Permission denied to create '{directory_name}'.")
+                    print(f"Error: Permission denied to create '{c[1]}'.")
                 except Exception as e:
                     print(f"Error: {e}")
             continue
 
         if c[0] == 'removedir':
             if len(c) > 1:
-                directory_name = c[1]
                 try:
-                    
-                    # os.rmdir(directory_name) does not remove directories when not empty
-                    shutil.rmtree(directory_name) # forcefully remove the entire directory
-                    print(f"Directory:{directory_name} removed successfully")
-                except FileExistsError:
-                    print(f"Error: The directory '{directory_name}' does not exists.")
+                    shutil.rmtree(c[1]) 
+                    print(f"Directory: {c[1]} removed successfully")
+                except FileNotFoundError:
+                    print(f"Error: The directory '{c[1]}' does not exist.")
                 except PermissionError:
-                    print(f"Error: Permission denied to remove '{directory_name}'.")
+                    print(f"Error: Permission denied to remove '{c[1]}'.")
                 except Exception as e:
                     print(f"Error: {e}")
-
             continue
-
 
         if c[0] == 'changedir':
             prev_dir = os.getcwd()
@@ -129,14 +123,13 @@ def main():
             continue
 
         if c[0] == 'curdir':
-            #if len(c)>1:
             try:
                 print(os.getcwd())
             except Exception as e:
                 print(e)
             continue
 
-        if c[0] == 'changedir' and c[1] == '-' or c[0]=='changedir' and c[1] == "..":
+        if c[0] == 'changedir' and c[1] == '-' or c[0] == 'changedir' and c[1] == "..":
             if prev_dir:
                 os.chdir(prev_dir)
                 print(f"Directory successfully changed to {prev_dir}")
@@ -144,49 +137,46 @@ def main():
                 print("No previous directory to return to")
             continue
 
-        
-        
-        # file handling
-        if c[0]=='createfile':
+        # File Handling
+        if c[0] == 'createfile':
             try:
-                with open(f"{c[1]}", "w") as f:
+                with open(c[1], "w") as f:
                     f.write(" ")
-                print(f"{c[1]}: file created succesfully")
+                print(f"{c[1]}: file created successfully")
             except FileNotFoundError as e:
                 print(e)
             except Exception as e:
                 print(f"Error: {e}")
             continue
-        if c[0]=='delfile':
+
+        if c[0] == 'delfile':
             try:
                 os.remove(c[1])
-                print(f"{c[1]}: file deleted succesfully")
+                print(f"{c[1]}: file deleted successfully")
             except FileNotFoundError as e:
                 print(e)
             except Exception as e:
                 print(f"Error: {e}")
             continue
-        
-        if c[0]== "writefile":
+
+        if c[0] == "writefile":
             try:
-                with open(f"{c[1]}", "w") as f:
+                with open(c[1], "w") as f:
                     writer = input("Enter the Content you want to write: ")
                     f.write(writer)
-                print(f"file {c[1]}: data written succesfully")
-
+                print(f"File {c[1]}: data written successfully")
             except FileNotFoundError as e:
                 print(e)
             except Exception as e:
                 print(e)
             continue
 
-        if c[0]== "appendfile":
+        if c[0] == "appendfile":
             try:
-                with open(f"{c[1]}", "a") as f:
+                with open(c[1], "a") as f:
                     writer = input("Enter the Content you want to append: ")
                     f.write(writer)
-                print(f"file {c[1]}: data appended succesfully")
-
+                print(f"File {c[1]}: data appended successfully")
             except FileNotFoundError as e:
                 print(str(e))
             except Exception as e:
@@ -213,10 +203,7 @@ def main():
                 print(f"Error: {e}")
             continue
 
-        
-
-
-
+        # Running external executable commands
         found = False
         for path in os.getenv("PATH").split(os.pathsep):
             if os.path.isdir(path):
@@ -228,10 +215,9 @@ def main():
                         break
             if found:
                 break
+
         if not found:
             print(f"{command}: command not found")
-        
-
 
 if __name__ == '__main__':
     main()
