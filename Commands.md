@@ -15,6 +15,7 @@
   <li><code>changedir &lt;directory_path&gt;</code> - Changes the current directory.</li>
   <li><code>curdir</code> - Displays the current directory path.</li>
   <li><code>changedir -</code> - Switches back to the previous directory.</li>
+  <li><code>help -</code> - Lists all the commands available.</li>
 </ul>
 
 ---
