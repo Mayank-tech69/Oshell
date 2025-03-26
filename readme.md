@@ -1,101 +1,145 @@
+Here's your updated `README.md`, incorporating both the C++ and Python versions of O-Shell:  
 
-<h1 align="center">🖥️ O-Shell - Custom Command Line Shell</h1>
+---
+
+# 🖥️ O-Shell - Custom Command Line Shell  
 
 <p align="center">
   <a href="https://github.com/Mayank-tech69/Oshell"><img src="https://img.shields.io/badge/GitHub-Repo-blue?style=flat&logo=github" alt="GitHub Repo"></a>
 </p>
 
-<p align="center">
-  O-Shell is a <b>custom shell</b> built using Python that provides Linux-like commands for both <b>Windows & Linux</b>.
-</p>
+O-Shell is a **custom shell** written in **C++ and Python**, providing Linux-like commands for both **Windows & Linux** with improved performance and flexibility.  
 
-<hr>
+---
 
-<h2>📌 Table of Contents</h2>
+## 📌 Table of Contents  
+- [🚀 Installation](#installation)  
+- [⚙️ Usage](#usage)  
+- [📌 Features](#features)  
+- [📖 Commands](Commands.md)  
+- [📜 License](#license)  
 
-<ul>
-  <li><a href="#installation">🚀 Installation</a></li>
-  <li><a href="#usage">⚙️ Usage</a></li>
-  <li><a href="#features">📌 Features</a></li>
-  <li><a href="Commands.md">📖 Commands</a></li>
+---
 
-  <li><a href="#license">📜 License</a></li>
-</ul>
+## 🚀 Installation  
 
-<hr>
+### 🔹 C++ Version  
 
-<h2 id="installation">🚀 Installation</h2>
+#### For Linux:  
+1. Clone this repository:  
 
-<ol>
-  <li>Clone this repository:</li>
-</ol>
+   ```sh
+   git clone https://github.com/Mayank-tech69/Oshell.git
+   ```  
 
-```sh
-git clone https://github.com/Mayank-tech69/Oshell.git
-```
+2. Navigate to the project directory:  
 
-<ol start="2">
-  <li>Navigate to the project directory:</li>
-</ol>
+   ```sh
+   cd Oshell
+   ```  
 
-```sh
-cd Oshell
-```
+3. Compile the source code:  
 
-<ol start="3">
-  <li>Run the shell script:</li>
-</ol>
+   ```sh
+   g++ -o oshell oshell.cpp -std=c++17
+   ```  
 
-```sh
-python script.py
-```
+4. Run the shell:  
 
-<p align="right"><a href="#top">🔼 Back to Top</a></p>
+   ```sh
+   ./oshell
+   ```  
 
-<hr>
+#### For Windows:  
+1. Clone this repository:  
 
-<h2 id="usage">⚙️ Usage</h2>
+   ```sh
+   git clone https://github.com/Mayank-tech69/Oshell.git
+   ```  
 
-<ul>
-  <li>Run <code>script.py</code> and start entering commands.</li>
-  <li>Example:</li>
-</ul>
+2. Navigate to the project directory:  
 
-```sh
-ls
-```
+   ```sh
+   cd Oshell
+   ```  
 
-<p align="right"><a href="#top">🔼 Back to Top</a></p>
+3. Compile the source code using MinGW (or any C++ compiler that supports C++17):  
 
-<hr>
+   ```sh
+   g++ -o oshell.exe oshell.cpp -std=c++17
+   ```  
 
-<h2 id="features">📌 Features</h2>
+4. Run the shell:  
 
-<ul>
-  <li>✅ <b>Cross-Platform Support</b> - Works on both <b>Windows</b> and <b>Linux</b></li>
-  <li>✅ <b>Custom <code>ls</code> command</b> for Windows & Linux</li>
-  <li>✅ <b>Directory Operations</b> - Create, remove, and navigate directories</li>
-  <li>✅ <b>File Operations</b> - Create, delete, copy, write, and append to files</li>
-  <li>✅ <b>Built-in Commands</b> - <code>clear</code>, <code>exit</code>, <code>speak</code>, and more</li>
-  <li>✅ <b>History Support</b> - Tracks previously entered commands</li>
-</ul>
+   ```sh
+   oshell.exe
+   ```  
 
-<p align="right"><a href="#top">🔼 Back to Top</a></p>
+---
 
-<hr>
+### 🔹 Python Version  
 
+#### Prerequisites:  
+Ensure you have Python 3 installed.  
 
+#### Installation:  
 
+1. Clone the repository:  
 
+   ```sh
+   git clone https://github.com/Mayank-tech69/Oshell.git
+   ```  
 
-<h2 id="license">📜 License</h2>
+2. Navigate to the project directory:  
 
-<p>This project is licensed under the <b>MIT License</b>. See the <a href="LICENSE">LICENSE</a> file for more details.</p>
+   ```sh
+   cd Oshell
+   ```  
 
-<p align="right"><a href="#top">🔼 Back to Top</a></p>
+3. Run the Python shell:  
+
+   ```sh
+   python oshell.py
+   ```  
+
+---
+
+## Alternative Method(RECOMMENDED)
+
+Just download the latest released version from the repository and use it.
+
+## ⚙️ Usage  
+
+- Run **O-Shell** using either the C++ or Python version and start entering commands.  
+- Example:  
+
+  ```sh
+  ls
+  ```  
+
+---
+
+## 📌 Features  
+
+### ✅ **C++ Shell Features:**  
+- **Cross-Platform Support** - Works on **Windows & Linux**  
+- **Custom `ls` command** for listing files  
+- **File Operations** - Create, delete, copy, write, append, and rename files  
+- **Directory Operations** - Create, remove, and navigate directories  
+- **Built-in Commands** - `clear`, `exit`, `speak`, `help`, and more  
+- **Command History Support**  
+
+### ✅ **Python Shell Features:**  
+- **Cross-Platform Compatibility**  
+- **Similar Commands as C++ Shell**  
+- **Extensible & Easy to Modify**  
+- **Uses Python's `os` and `shutil` modules for efficient file handling**  
+
+---
+
+## 📜 License  
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.  
 
 ---
 ---
-
-
-
