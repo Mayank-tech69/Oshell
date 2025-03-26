@@ -1,4 +1,3 @@
-Here's your updated `README.md`, incorporating both the C++ and Python versions of O-Shell:  
 
 ---
 
