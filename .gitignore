@@ -1,3 +1,5 @@
 script.spec
 build/
 dist/
+cpp-shell/
+.vscode/
