@@ -77,7 +77,12 @@ void execute_command(const vector<string>& args) {
     }
 
     if (command == "clear") {
-        system("clear"); // Use cls for Windows
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+
         return;
     }
 
